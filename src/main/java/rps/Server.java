@@ -37,7 +37,7 @@ public class Server {
 
     // count live connections
     public boolean newConnection() {
-        var count = numberOfConnections.getAndUpdate(i -> ((i < MAX_NUMBER_OF_CONNECTIONS) ? i + 1 : i));
+        var count = numberOfConnections.getAndUpdate(i -> i + 1);
         return count < MAX_NUMBER_OF_CONNECTIONS;
     }
 

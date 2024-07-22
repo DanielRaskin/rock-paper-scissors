@@ -39,4 +39,22 @@ public class ServerTest {
         secondLatch.await();
         assert result.get();
     }
+
+    // check server number of connections control
+    @Test
+    public void newConnectionTest() {
+        Server server = new Server();
+        for (var i = 0; i < Server.MAX_NUMBER_OF_CONNECTIONS; i++) {
+            assert server.newConnection();
+        }
+        for (var i = 0; i < 10; i++) {
+            assert (! server.newConnection());
+        }
+        for (var i = 0; i < 15; i++) {
+            server.releasePlayer(null);
+        }
+        for (var i = 0; i < 5; i++) {
+            assert server.newConnection();
+        }
+    }
 }

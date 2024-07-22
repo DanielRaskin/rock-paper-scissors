@@ -27,6 +27,7 @@ public class UserSession implements Runnable {
             if (! server.newConnection()) {
                 // server doesn't allow new connections if there are too many players
                 writer.println("Невозможно начать игру, слишком много игроков. Попробуйте позже.");
+                return;
             }
             socket.setSoTimeout(Server.TIMEOUT);
             var is = socket.getInputStream();
